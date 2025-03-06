@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - "3307:3306"  # Mapeo del puerto 3307 del host al puerto 3306 del contenedor
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myStore
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmysql
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root  # Asegúrate de que coincida con el de MySQL
